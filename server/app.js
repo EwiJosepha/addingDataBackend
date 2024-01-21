@@ -3,6 +3,7 @@ const app =express()
 const cors = require('cors')
 const dotenv = require("dotenv")
 dotenv.config()
+const dbservice =require("./dbservice")
 
 app.use(cors())
 app.use(express.json())
@@ -18,9 +19,9 @@ app.post('/insert', (req,res)=>{
 
 //read
 app.get("/getall", (req,res)=>{
-  res.json({
-    Success: true
-  })
+  const db = dbservice.getDbServiceInstance()
+   const result = db.getAllData() 
+  result.then(data =>response.json({data:data})).catch(err => console.log(err)) 
 })
 //update
 
