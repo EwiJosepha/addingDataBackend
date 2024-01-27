@@ -1,7 +1,7 @@
 const mysql = require('mysql2')
 const dotenv = require('dotenv')
 dotenv.config()
-let instance = null
+let instance = null;
 const connection = mysql.createConnection({
   host: process.env.DB_HOST,
   port: process.env.DB_PORT,
@@ -15,7 +15,7 @@ connection.connect((err) => {
     console.error("err.message", err);
   }
   console.log("hello");
-  console.log("data base connection established");
+  console.log("data base " + process.env.DB_NAME);
 })
 
 class DbService {
@@ -32,7 +32,7 @@ class DbService {
           resolve(results)
         })
       })
-console.log(response);
+      console.log(response);
       return response;
 
     } catch (err) {
